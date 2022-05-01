@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, choice
 
 def guess_number():
     """Guess the Number Between 1 to 20."""
@@ -42,5 +42,34 @@ def guess_number():
     else:
         print("Yay, congrats! You guessed the correct number {0}, in {1} attempts.".format(random_number, count))
 
-guess_number()
+
+def computer_guess(x):
+    """Computer will guess your number between 1 to x."""
+    low = 1
+    high = x
+    lst = list(range(low, high + 1))
+    feedback = ''
+    count = 0
+
+    while feedback.lower() != 'c':
+        if low != high:
+            guess = choice(lst)
+        
+        feedback = input("Is {0} too high (H), too low (L), or correct (C)? ".format(guess))
+
+        if feedback.lower() == 'h':
+            count += 1
+            i = lst.index(guess)
+            lst = lst[:i]               # remove all the items greater or equal to guess number
+        elif feedback.lower() == 'l':
+            count += 1
+            lst = lst[guess:]           # remove all the elements smaller or equal to guess number
+        elif feedback.lower() == 'c':
+            count += 1
+
+    print("\nComputer guessed your number {0} in {1} attempts!".format(guess, count))
+
+
+# guess_number()
+computer_guess(10)
 input("")
