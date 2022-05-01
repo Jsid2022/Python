@@ -60,10 +60,11 @@ def computer_guess(x):
         if feedback.lower() == 'h':
             count += 1
             i = lst.index(guess)
-            lst = lst[:i]               # remove all the items greater or equal to guess number
+            lst = lst[:i]             # remove all the items greater or equal to guess number
         elif feedback.lower() == 'l':
             count += 1
-            lst = lst[guess:]           # remove all the elements smaller or equal to guess number
+            g = lst.index(guess)
+            lst = lst[g:]           # remove all the elements smaller or equal to guess number
         elif feedback.lower() == 'c':
             count += 1
 
