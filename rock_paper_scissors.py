@@ -32,31 +32,49 @@ def computer_choice():
     return comp_choice
 
 
+def is_win(player, computer):
+    """Decide the winner of each round."""
+    if player == 'P' and computer == 'R':
+        return True
+    elif player == 'R' and computer == 'S':
+        return True
+    elif player == 'S' and computer == 'P':
+        return True
+    return False
+
 def play_game():
     """Start the game."""
     player_score = 0
-    computer_score = 0
     rou = 5
 
     # R > S, P > R, S > P 
     while rou != 0:
         player = player_choice()
         computer = computer_choice()
+        print(computer)
+        
         if player == computer:
             print("It's a Tie!")        # If it's a Tie, then round doesn't count.
-        elif (player == 'R' and computer == 'S') or (player == 'P' and computer == 'R') \
-            or (player == 'S' or computer == 'P'):
-            print("You won this Round!\n")
+        elif is_win(player, computer):
+            rou -= 1
             player_score += 1
-            rou -= 1
+            print("You won this round!")
         else:
-            print("Computer won this Round!")
-            computer_score += 1
             rou -= 1
+            print("Computer won this round!")
 
     return player_score
 
 
+def declare_winner():
+    """Declare the winner of the game."""
+    score = play_game()
+    if score >= 3:
+        print("\nCongrats, You won {0} out of 5 rounds.\nYou win".format(score))
+    else:
+        print("\nComputer won {0} out of 5 rounds.\nBetter luck next time.".format(5 - score))
+
+
 print(game_rules())
-print(play_game())
-input()
+declare_winner()
+input("\n\nPress Enter to quit.")
