@@ -7,7 +7,7 @@ def game_rules():
     strng += "Game Rules:\n"
     strng += "--> Rock wins against Scisscors\n"
     strng += "--> Paper wins against Rock\n"
-    strng += "--> Scissors wins Paper\n\n"
+    strng += "--> Scissors wins against Paper\n\n"
     strng += "Who ever wins first 3 rounds, wins this game!\nGood luck."
     return strng
 
