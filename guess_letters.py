@@ -18,11 +18,11 @@ def about_game():
 
 def guess_letter():
     """Start the game."""
-    word = choice(words).upper()
-    word_letters = set(word)
-    letter_list = list(word)
-    word_list = ['_' for letter in word]
-    used_letters = set()
+    word = choice(words).upper()  # Get a random word.
+    letter_list = list(word)      # Make a list of words.(Original word)
+    word_letters = set(word)      # Make a list of words.(That doesn't repeat)
+    word_list = ['_' for letter in word]    # Make a list of words('_') equal to lenght of word.
+    used_letters = set()          # Initialized empty list to store user input.(repeated input will not be stored.)
     lives = 7
 
     while len(word_letters) > 0 and lives > 0:
@@ -32,17 +32,24 @@ def guess_letter():
         guess = input("Guess a letter: ").upper()
 
         if guess not in string.ascii_uppercase:
+            # If user's input is not in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             print("Invalid Input!")
         elif guess in used_letters:
+            # If user's input is in used_letters.
             print("You have already guessed that letter, Guess another letter.")
         elif guess not in used_letters:
+            # if user's input is not in user_letters.
             used_letters.add(guess)
             if guess in word_letters:
+                # If user's input is in word_letters
                 word_letters.remove(guess)
-            else:
+            else: # else print.
                 print("Your letter {0} is not in the word.".format(guess))
                 lives -= 1
 
+        # If user's input is in word_letter's then
+        # Loop through each item in word_list
+        # And replace it with user's input.
         while index < len(word_list):
             if letter_list[index] == guess:
                 word_list[index] = guess
