@@ -11,7 +11,7 @@ def about_game():
     strng += "For example the word is: 'CRICKET'.\n"
     strng += "--> Guess a letter, If that letter is in word,\n"
     strng += "    Then that letter will be displayed like this _R__KE_.\n"
-    strng += "--> You have total 5 attempts to guess the letters of word correctly.\n"
+    strng += "--> You have total 7 attempts to guess the letters of word correctly.\n\n"
     strng += "Good Luck!"
     print(strng)
 
@@ -23,7 +23,7 @@ def guess_letter():
     letter_list = list(word)
     word_list = ['_' for letter in word]
     used_letters = set()
-    lives = 5
+    lives = 7
 
     while len(word_letters) > 0 and lives > 0:
         index = 0
@@ -56,4 +56,4 @@ def guess_letter():
 
 about_game()
 guess_letter()
-input('')
+input('\n\nPress Enter to quit.')
