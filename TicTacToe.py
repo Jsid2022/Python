@@ -1,41 +1,33 @@
-from random import randint
+from random import randint, choice
 
 class TicTacToe:
 
     def __init__(self):
-        self.board = []
+        self.board = [
+                      ['-', '-', '-'],
+                      ['-', '-', '-'],
+                      ['-', '-', '-'],
+                    ]
 
-    def create_board(self):
-
-        """Create a board of 3 by 3 (3x3)"""
-        for i in range(3):
-            row = []
-            for j in range(3):
-                row.append('-')
-            self.board.append(row)
+    def print_board(self):
+        """This function will print the board."""
+        for row in self.board:
+            for col in row:
+                print(f"{col}", end="  ")
+            print()
 
     def player_cords(self):
         """Get Player's coordinates."""
         while True:
             row = int(input("Enter Row Number: "))
-            if row >= 1 and row <= 3:
-                break
-            else:
-                print("Invalid Input!\nSelect from 1 to 3.\n")
+            if row >= 1 and row <= 3: break
+            else: print("Invalid Input!\nSelect from 1 to 3.\n")
         
         while True:
             col = int(input("Enter Column Number: "))
-            if col >= 1 and col <= 3:
-                break
-            else:
-                print("Invalid Input!\nSelect from 1 to 3.\n")
+            if col >= 1 and col <= 3: break
+            else: print("Invalid Input!\nSelect from 1 to 3.\n")
 
-        coords = (row, col)
-        return list(coords)
-
-    def computer_cords(self):
-        """Generate computers Random coordinates."""
-        row , col = randint(1, 3), randint(1, 3)
         coords = (row, col)
         return list(coords)
 
@@ -49,38 +41,34 @@ class TicTacToe:
             return False
         return True
 
-    def print_board(self):
-        """This function will print the board."""
-        for row in self.board:
-            for col in row:
-                print(col, end=" ")
-            print()
+    def is_board_full(self, b):
+        for row in b:
+            for item in row:
+                if item == '-':
+                    return False
+        return True
 
     def start_game(self):
-        """Let the Game Begins."""
-        self.create_board()
+        """Let the game Begin's."""
+        possible_cords = [[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3]]
         p_symbol = 'X' if self.random_turn() == 1 else 'O'
-        c_symbol = 'X' if self.random_turn() == 0 else 'O'
-        used_cords = []
-        while True:
-            while True:
-                player = self.player_cords()
-                if self.is_taken(player[0] - 1, player[1] - 1):
-                    print("That slot is already occupied, Select another slot.")
-                else:
-                    self.board[player[0] - 1][player[1] - 1] = p_symbol
-                    break
+        c_symbol = 'O' if p_symbol == 'X' else 'X'
+        board = self.board
 
-            while True:
-                computer = self.computer_cords()
-                if self.is_taken(computer[0] - 1, computer[1] - 1) == False:
-                    self.board[computer[0] - 1][computer[1] - 1] = c_symbol
-                    break
+        while self.is_board_full(board) == False:
+            print()
             self.print_board()
+            print()
+            player = self.player_cords()
+            if self.is_taken(player[0] - 1, player[1] - 1):
+                print("That slot is already occupied, Try again!")
+            else:
+                possible_cords.remove(player)
+                board[player[0] - 1][player[1] - 1] = p_symbol
+                computer = choice(possible_cords)
+                possible_cords.remove(computer)
+                board[computer[0] - 1][computer[1] - 1] = c_symbol
 
 
 b = TicTacToe()
-# b.create_board()
-# b.print_board()
 b.start_game()
-input()
