@@ -86,13 +86,13 @@ class TicTacToe:
         # Check Diagnals
         win = True
         for i in range (n):
-            if self.board != player:
+            if self.board[i][i] != player:
                 win = False
         if win:
             return win
         
         for i in range(n):
-            if self.board[n - 1 - i] != player:
+            if self.board[i][n - 1 - i] != player:
                 win = False
         if win:
             return win
