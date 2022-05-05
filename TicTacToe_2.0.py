@@ -22,7 +22,6 @@ class TicTacToe:
 
     def print_board(self):
         """This Function will print the board."""
-
         for row in self.board:
             for squares in row:
                 print('|',squares, '|',end='')
@@ -95,23 +94,24 @@ class TicTacToe:
 def play_game():
     """Start the Game."""
     game = TicTacToe()
-    game.create_board()
+    game.create_board()  # Create Board
     symbol = 'X'
-
+    
+    # End game If Board is Full.
     while len(game.available_squares) != 0:
         if symbol == 'X':
             square = game.get_human_move()
         else:
             square = game.get_computer_move()
 
-        game.fix_spot(square, symbol)
+        game.fix_spot(square, symbol)  # Fix spot for each Player.
         print("\n{0} makes a move to square {1}".format(symbol, square))
         game.print_board()
         print()
-        if game.is_winner(symbol):
+        if game.is_winner(symbol):  # If anyone wins End the game.
             print("{0} Won !!".format(symbol))
             break
-        
+        # Swap Player's Turn.
         if symbol == 'X': 
             symbol = 'O'
         else: symbol = 'X'
