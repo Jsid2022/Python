@@ -1,7 +1,16 @@
-from random import shuffle
+from random import randint
 
-def binary_search(search, list):
-    """Search Your Number in the Given list."""
+
+def linear_search(target, list):
+    """Search your target through Linear search."""
+    result = []
+    for item in list:
+        if item == target: 
+            result.append(item)
+            print("Your Number {0} is in the list.".format(item))
+
+def binary_search(target, list):
+    """Search Your target through Binary search."""
     # Copy of Original List.
     copy_list = sorted(list[:])
     while True:
@@ -15,21 +24,32 @@ def binary_search(search, list):
         
         # If the middle_index is 0 and search is not item
         # exit loop
-        if middle_index == 0 and search != item:
-            return print("Your Number is not in the List.")
-        elif search == item:  # Item Found.(Can Exit loop)
+        if middle_index == 0 and target != item:
+            return -1
+        elif target == item:  # Item Found.(Can Exit loop)
             print("Yes your Number is in list")
             break
         # if search is smaller at middle index's item
         # remove all the items smaller than middle index's item.
-        elif search < item: 
+        elif target < item: 
             copy_list = copy_list[:middle_index]
         # else vice versa.
         else:
             copy_list = copy_list[middle_index:]
 
 
-# List of number's between 1 to 1000.
-number_list = [i for i in range(1, 1001)]
-shuffle(number_list)  # Shuffle the list.
-binary_search(1001, number_list)
+# Make a random list of 100 Integers.
+random_list1 = set()
+while len(random_list1) != 100:
+    random_list1.add(randint(1, 10000))
+
+# Make a list of random 10 integers.
+random_list2 = set()
+while len(random_list2) != 10:
+    random_list2.add(randint(1, 10000))
+
+sorted_list = sorted(list(random_list1))
+search_list = sorted(list(random_list2))
+
+for item in search_list:
+    linear_search(item, search_list)
