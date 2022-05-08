@@ -1,6 +1,7 @@
 def get_user_input():
     """
-    This Function will return the user input values.
+    This Function will return the user input values,
+    for password_generator2.py.
     """
     pass_information = {}
     choices = ['yes', 'no', 'y', 'n']
